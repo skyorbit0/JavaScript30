@@ -160,6 +160,7 @@
 
     function toggleActive(e) {
       console.log(e.propertyName);
+      // transitionend被触发多次 通过propertyName筛选
       if (e.propertyName.includes('flex')) {
         this.classList.toggle('open-active');
       }
