@@ -1,15 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Console Tricks!</title>
+  <style>
+    p {
+      cursor: pointer;
+    }
+  </style>
 </head>
+
 <body>
 
   <p onClick="makeGreen()">×BREAK×DOWN×</p>
 
   <script>
-    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+    const dogs = [{
+      name: 'Snickers',
+      age: 2
+    }, {
+      name: 'hugo',
+      age: 8
+    }];
 
     function makeGreen() {
       const p = document.querySelector('p');
@@ -17,30 +30,75 @@
       p.style.fontSize = '50px';
     }
 
-    // Regular
+    // Regular 普通
+    console.log('console.log:' + 'hello');
 
-    // Interpolated
+    // Interpolated 插值
+    console.log('Hello I am a %s string!', '💩');
 
-    // Styled
+    // Styled 添加样式
+    console.log('%c I am some great text', 'font-size: 50px;background:red; text-shadow: 10px 10px 0 blue');
 
-    // warning!
+    // warning! 输出警告
+    console.warn('OH NOOO');
 
-    // Error :|
+    // Error :| 输入错误信息
+    console.error('Shit!');
 
-    // Info
+    // Info 输出信息形信息
+    console.info('Crocodiles eat 3-4 people per year');
 
     // Testing
+    const p = document.querySelector('p');
+    // console.assert(判断第一个参数是否为真，false的话抛出异常并且在控制台输出相应信息。)
+    console.assert(p.classList.contains('ouch', 'This is wrong!'));
 
-    // clearing
+    // clearing 清空控制台（之前执行的代码仍有效）
+    console.clear();
 
     // Viewing DOM Elements
+    console.log(p);
+    // 输入一个三角形开头的对象
+    console.dir(p);
+    console.clear();
 
-    // Grouping together
+    // Grouping together 将输入的信息分类放在一起 打印树状结构 可以嵌套
+    dogs.forEach(dog => {
+      console.groupCollapsed(`${dog.name}`)
+      console.log(`This is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.log(`${dog.name} is ${dog.age*7} dog years old`);
+      console.groupEnd(`${dog.name}`);
+    });
 
-    // counting
+    // counting 累积计算
+    console.count('Wes');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Wes');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
+    console.count('Steve');
 
     // timing
+    console.time('fetching data');
+    fetch('https://api.github.com/users/wesbos')
+      .then(data => data.json())
+      .then(data => {
+        console.timeEnd('fetching data');
+        console.log(data);
+        console.table(data);
+      });
+    console.table(dogs);
 
+    // 打印当前位置
+    console.trace();
   </script>
 </body>
+
 </html>
