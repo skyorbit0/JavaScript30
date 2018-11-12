@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Key Detection</title>
   <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
+
 <body>
-<script>
-</script>
+  <script>
+    // 检测输入的字符串 然后调用cornify_add()方法
+
+    // 用来存输入的字符串
+    const pressed = [];
+    const secretCode = 'wesbos';
+
+    window.addEventListener('keyup', (e) => {
+      console.log(e.key);
+      pressed.push(e.key);
+      console.log(pressed);
+      // 当输入的字符串大于密码的时候 删除数组中的项目，删除开头的一个，数组始终保持在6位
+      pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length);
+      console.log(pressed);
+      if (pressed.join('').includes(secretCode)) {
+        console.log('DING DING!');
+        cornify_add();
+      }
+    })
+  </script>
 </body>
+
 </html>
