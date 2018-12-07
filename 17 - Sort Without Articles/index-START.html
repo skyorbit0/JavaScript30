@@ -54,11 +54,11 @@
 
 
     function strip(bandName) {
-      return bandName.replace(/^(a|the|an)/i, '').trim();
+      return bandName.replace(/^(a |the |an )/i, '').trim();
     }
 
 
-    // 去掉a the an 后进行比较排序
+    // 去掉a the an 后进行比较排序，如果a>b 返回1 则a排在后面
     const sortedBands = bands.sort((a, b) => strip(a) > strip(b) ? 1 : -1);
 
     document.querySelector('#bands').innerHTML =
