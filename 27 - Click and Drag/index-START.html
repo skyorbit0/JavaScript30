@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Click and Drag</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <title>Click and Drag</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="items">
+<div class="items">
     <div class="item item1">01</div>
     <div class="item item2">02</div>
     <div class="item item3">03</div>
@@ -32,10 +32,54 @@
     <div class="item item23">23</div>
     <div class="item item24">24</div>
     <div class="item item25">25</div>
-  </div>
+</div>
 
 <script>
+    const slider = document.querySelector('.items');
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    // 鼠标点击触发 添加类
+    slider.addEventListener('mousedown', (e) => {
+        isDown = true;
+        slider.classList.add('active');
+        // 鼠标距离边界的距离
+        startX = e.pageX - slider.offsetLeft;
+        // 滚动过的距离
+        scrollLeft = slider.scrollLeft;
+        // 测试
+        console.log('e.pageX ' + e.pageX);
+        console.log('slider.offsetLeft ' + slider.offsetLeft);
+        console.log('slider.scrollLeft ' + slider.scrollLeft);
+    });
+
+    // 鼠标离开
+    slider.addEventListener('mouseleave', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+    slider.addEventListener('mouseup', () => {
+        isDown = false;
+        slider.classList.remove('active');
+    });
+
+
+    // 鼠标移动
+    slider.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        // 鼠标距离边界的距离
+        const x = e.pageX - slider.offsetLeft;
+        // 移动的后 的距离-原来的距离 *3倍速度
+        // 鼠标向右移动是正，向左移动为负
+        const walk = (x - startX) * 3;
+        // 重写滚动的距离实现拖动
+        slider.scrollLeft = scrollLeft - walk;
+    });
+
 </script>
 
-  </body>
+</body>
 </html>
